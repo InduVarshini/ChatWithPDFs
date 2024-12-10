@@ -7,7 +7,7 @@ import google.generativeai as genai
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
@@ -30,7 +30,7 @@ def get_pdf_text(pdf_docs):
 #Split the text into chunks of 10000 characters
 def get_text_chunks(text):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=1000)
-    chunks = text_splitter.split(text)
+    chunks = text_splitter.split_text(text)
     return chunks
 
 #Convert the text chunks into vectors
@@ -60,7 +60,7 @@ def get_conversational_chain():
 def user_input(user_question):
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
     
-    new_db = FAISS.load_local("faiss_index", embeddings)
+    new_db = FAISS.load_local("faiss_index", embeddings,allow_dangerous_deserialization=True)
     docs = new_db.similarity_search(user_question)
     
     chain = get_conversational_chain()
@@ -83,7 +83,7 @@ def main():
         user_input(user_question)
 
     with st.sidebar:
-        st.title("Menu:")
+        st.title("Upload PDF Files")
         pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True)
         if st.button("Submit & Process"):
             with st.spinner("Processing..."):
