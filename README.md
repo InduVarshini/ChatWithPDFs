@@ -1,32 +1,74 @@
 # ChatWithPDFs
-A Langchain based LLM application built to chat with multiple PDFs at the same time.
+
+A LangChain-based LLM application designed to chat with multiple PDFs simultaneously.
+
+You can access the app on 
+[https://chatwithmorepdfs.streamlit.app/](https://chatwithmorepdfs.streamlit.app/)
 
 ## Introduction
-Langchain based LLM application to chat with multiple PDFs at the same time. Currently chatting with documents, especially with multiple documents is present only in the Paid versions of the AI tools available, like ChatGPT. While some other LLM applications like ChatPDF also provide a similar service to chat with PDF, it can only answer questions from a single PDF at a time. Moreover on the free tier of this application, you can only upload and chat with a maximum of two PDFs in a day. This application is developed to overcome this challenge and make this feature available to everyone who wants to read/reference from multiple PDFs at the same time at zero cost! Very useful to students who are looking to cramp their study materials at the last minute and score good grades. This application can handle any number of files (tested with a maximum of 20 PDFs) each of maximum size 200MB. This is a pretty good number to start with for an LLM PDF chat app.
 
-The application is hosted on the Streamlit app community to be accessible to everyone online.
+**ChatWithPDFs** is a LangChain-powered application that enables interactive conversations with multiple PDFs at the same time. While existing AI tools, like ChatGPT, offer similar functionality for document interaction, these features are often restricted to paid versions. Tools like ChatPDF allow interactions with PDFs, but typically limit users to one document at a time, and impose strict usage caps on free tiers (e.g., only two PDFs per day).
 
-## TechStack
-This application uses the following techstack to achieve the desired results:
-Langchain - LLM orchestration framework
-FAISS (Facebook AI Similarity Search) - Open Source Vector Database
-Google Gemini Pro - Pre trained General Large Language Model for 
-PyPDF2 - Open Source pure-python library for working with PDFs
-Streamlit - Open Source python library to host the application as a Web App
+This application addresses those limitations by providing a free, open-access solution for chatting with multiple PDFs simultaneously. Whether you're a student preparing for exams or someone referencing multiple documents for research, **ChatWithPDFs** makes it easy to handle up to 20 PDFs (each up to 200MB) at once, ensuring a robust experience for diverse use cases.
 
-## How does the app work:
-Go to the app website, upload your files and submit for it to process
-Now, in the chat pane, ask your desired questions. You can write any prompts to the app!
+The app is hosted online via the Streamlit community platform, making it accessible to everyone.
 
-What happens in the app:
+---
 
+## Features
 
-## How to run it locally:
+- **Multi-PDF Interaction**: Chat with multiple PDFs simultaneously, overcoming the restrictions of most free-tier AI tools.
+- **High Capacity**: Supports up to 20 PDFs at once, each with a maximum file size of 200MB.
+- **Cost-Free Access**: Available at zero cost, making it ideal for students and researchers.
+- **Simple Interface**: Upload your files, ask questions, and get answers with ease.
 
-For this application to work on your end, clone the repo, run the command,
-cp env.sample .env
+---
 
-After that go to https://aistudio.google.com/library and generate a Google API key and paste it in the file.
+## Tech Stack
 
-Run the app
-streamlit run app.py
+This application is built using the following technologies:
+
+- **LangChain**: Framework for orchestrating large language models (LLMs).
+- **FAISS (Facebook AI Similarity Search)**: Open-source vector database for efficient document indexing and retrieval.
+- **Google Gemini Pro**: Pre-trained general-purpose LLM.
+- **PyPDF2**: Python library for extracting and processing PDF content.
+- **Streamlit**: Python-based library for building interactive web applications.
+
+---
+
+## How It Works
+
+### Using the App Online:
+
+1. Visit the app at [https://chatwithmorepdfs.streamlit.app/](https://chatwithmorepdfs.streamlit.app/) 
+2. Upload your desired PDF files and submit them for processing.
+3. Use the chat pane to ask questions or write prompts related to the uploaded documents.
+
+### Behind the Scenes:
+
+1. Uploaded PDFs are processed to extract and index content using PyPDF2 and FAISS.
+2. User prompts are handled by the LLM (Google Gemini Pro), which queries the indexed content for relevant answers.
+3. Results are returned in real time, enabling seamless interaction with your documents.
+
+---
+
+## Running the Application Locally
+
+To run the application on your machine:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/InduVarshini/ChatWithPDFs.git
+   ```
+2. Set up environment variables:
+   ```bash
+   cp env.sample .env
+   ```
+3. Obtain a Google API key:
+   - Visit [Google AI Studio](https://aistudio.google.com/library).
+   - Generate an API key and paste it into the `.env` file.
+
+4. Start the application:
+   ```bash
+   streamlit run app.py
+   ```
