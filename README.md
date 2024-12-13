@@ -13,16 +13,12 @@ This application addresses those limitations by providing a free, open-access so
 
 The app is hosted online via the Streamlit community platform, making it accessible to everyone.
 
----
-
 ## Features
 
 - **Multi-PDF Interaction**: Chat with multiple PDFs simultaneously, overcoming the restrictions of most free-tier AI tools.
 - **High Capacity**: Supports up to 20 PDFs at once, each with a maximum file size of 200MB.
 - **Cost-Free Access**: Available at zero cost, making it ideal for students and researchers.
 - **Simple Interface**: Upload your files, ask questions, and get answers with ease.
-
----
 
 ## Tech Stack
 
@@ -33,8 +29,6 @@ This application is built using the following technologies:
 - **Google Gemini Pro**: Pre-trained general-purpose LLM.
 - **PyPDF2**: Python library for extracting and processing PDF content.
 - **Streamlit**: Python-based library for building interactive web applications.
-
----
 
 ## How It Works
 
@@ -49,8 +43,6 @@ This application is built using the following technologies:
 1. Uploaded PDFs are processed to extract and index content using PyPDF2 and FAISS.
 2. User prompts are handled by the LLM (Google Gemini Pro), which queries the indexed content for relevant answers.
 3. Results are returned in real time, enabling seamless interaction with your documents.
-
----
 
 ## Running the Application Locally
 
