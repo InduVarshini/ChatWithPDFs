@@ -64,3 +64,4 @@ To run the application on your machine:
    ```bash
    streamlit run app.py
    ```
+   Last updated: Apr 1, 2026
