@@ -2,6 +2,7 @@ streamlit
 google-generativeai
 python-dotenv
 langchain
+langchain-text-splitters
 PyPDF2
 faiss-cpu
 langchain_google_genai
