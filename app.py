@@ -12,11 +12,14 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import PromptTemplate
 
-#Load the environment variables
+#Load the environment variables (local dev only)
 load_dotenv()
 
+#Get API key from Streamlit secrets (cloud) or .env (local)
+GOOGLE_API_KEY = st.secrets.get("GOOGLE_API_KEY", os.getenv("GOOGLE_API_KEY"))
+
 #Configure the Google API key
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=GOOGLE_API_KEY)
 
 #Read the uploaded PDFs one by one and each page in the pdf and extract the text
 def get_pdf_text(pdf_docs):
@@ -35,8 +38,8 @@ def get_text_chunks(text):
 
 #Convert the text chunks into vectors
 def get_vector_store(text_chunks):
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-    vector_store = FAISS.from_texts(text_chunks, embedding = embeddings)
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=GOOGLE_API_KEY)
+    vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
     vector_store.save_local("faiss_index")
 
 #Create a conversational chain with a prompt template   
@@ -49,7 +52,7 @@ def get_conversational_chain():
 
     Answer:
     """
-    model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.3)
+    model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.3, google_api_key=GOOGLE_API_KEY)
 
     prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
     chain = create_stuff_documents_chain(model, prompt)
@@ -58,9 +61,9 @@ def get_conversational_chain():
 
 #Get user input from the chatbox and get the response from the conversational chain
 def user_input(user_question):
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-    
-    new_db = FAISS.load_local("faiss_index", embeddings,allow_dangerous_deserialization=True)
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=GOOGLE_API_KEY)
+
+    new_db = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
     docs = new_db.similarity_search(user_question)
     
     chain = get_conversational_chain()
